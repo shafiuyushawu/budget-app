@@ -1,0 +1,14 @@
+
+  <% if current_user %>
+    <p>
+     <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+    </p>
+
+    <p>
+      <%= link_to "Edit Account", edit_user_registration_path %>
+    </p>
+
+    <br>
+  <% else %>
+    <%= render '/shared/home'%>
+  <% end %>

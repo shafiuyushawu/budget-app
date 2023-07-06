@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  icon: MyString
+  amount: 1
 
 two:
   name: MyString
-  icon: MyString
+  amount: 1

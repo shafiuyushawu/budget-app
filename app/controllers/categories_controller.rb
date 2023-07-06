@@ -1,23 +1,22 @@
 class CategoriesController < ApplicationController
   def new 
-		@categories = Group.new
-	end
+    @category = Category.new
+  end
 
-	def create 
-		@categories = Group.new(ca valuetegory_params)
-		@categories.user_id = current_user.id 
+  def create 
+    @category = Category.new(name: category_params[:name],icon: category_params[:icon], user_id: current_user.id )
+ 
 
-		if @catogories.save 
-			redirect_to root_path
-		else
-			render new
-		end
+    if @category.save 
+      redirect_to root_path
+    else
+      render :new
+    end
+  end 
 
-	end 
+  private 
 
-	private 
-
-	def category_params
-    params.require(:group).permit(:name, :icon)
+  def category_params
+    params.require(:category).permit(:name, :icon)
   end
 end

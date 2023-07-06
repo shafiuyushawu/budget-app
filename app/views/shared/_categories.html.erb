@@ -1,0 +1,28 @@
+<%= render '/shared/user_navbar'%>
+<p>
+ <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+</p>
+
+<main class="container mx-auto px-5 mt-5  w-full">
+	<% @categories.each do |category| %>
+  <%= link_to category_entities_path(category.id) do %>
+			<div class="flex gap-2 shadow-xl p-4 w-full">
+				<div class="avatar">
+					<div class="w-24 mask mask-squircle">
+						<img src="<%= category.icon %>" />
+					</div>
+				</div>
+				<div class="grid content-between">
+					<p class=""><%= category.name %></p>
+					<span class="text-sm"><%= category.created_at.strftime("%b %d, %Y") %></span>
+				</div>
+				<div>
+					<p class="font-bold text-xl">$17.00</p>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+
+</main>
+
+<br>

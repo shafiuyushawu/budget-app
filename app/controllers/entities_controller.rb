@@ -1,6 +1,7 @@
 class EntitiesController < ApplicationController
     def index 
-      @entities = current_user.entities.all
+      @entities = Entity.all
+      @categ
     end
   
     def new 
@@ -10,7 +11,7 @@ class EntitiesController < ApplicationController
     def create 
       @entity = Entity.new(name: transaction_params[:name], amount: transaction_params[:amount], user_id: current_user.id)
       if @entity.save
-        redirect_to entities_path, notice: "Entity was successfully created."
+        redirect_to category_entities_path, notice: "Entity was successfully created."
       else
         render :new
       end

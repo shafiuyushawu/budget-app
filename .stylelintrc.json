@@ -28,5 +28,5 @@
       ],
       "csstree/validator": true
     },
-    "ignoreFiles": ["build/**", "dist/**", "**/reset*.css", "**/bootstrap*.css", "node_modules/**"]
+    "ignoreFiles": ["app/build/**", "dist/**", "**/reset*.css", "**/bootstrap*.css", "node_modules/**", "app/assets/builds/tailwind.css"]
   }

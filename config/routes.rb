@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'pages#home'
   devise_for :users
@@ -6,8 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :categories, only: [:new, :create, :destroy] do
-    resources :entities, only: [:index, :new,  :create, :destroy]
+  resources :categories, only: %i[new create destroy] do
+    resources :entities, only: %i[index new create destroy]
   end
-
 end

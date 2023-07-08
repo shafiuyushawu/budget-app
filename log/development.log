@@ -41958,3 +41958,141 @@ Processing by CategoriesController#new as HTML
 Completed 200 OK in 123ms (Views: 92.8ms | ActiveRecord: 5.4ms | Allocations: 41922)
 
 
+Started GET "/" for ::1 at 2023-07-08 14:02:35 +0000
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (1.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 2]]
+  ↳ app/views/shared/_categories.html.erb:32
+  Rendered shared/_categories.html.erb (Duration: 30.0ms | Allocations: 2257)
+  Rendered pages/home.html.erb within layouts/application (Duration: 40.2ms | Allocations: 2987)
+  Rendered layout layouts/application.html.erb (Duration: 724.8ms | Allocations: 54955)
+Completed 200 OK in 929ms (Views: 748.4ms | ActiveRecord: 26.5ms | Allocations: 89243)
+
+
+Started GET "/" for ::1 at 2023-07-08 14:02:39 +0000
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (2.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 2]]
+  ↳ app/views/shared/_categories.html.erb:32
+  Rendered shared/_categories.html.erb (Duration: 8.6ms | Allocations: 973)
+  Rendered pages/home.html.erb within layouts/application (Duration: 9.7ms | Allocations: 1047)
+  Rendered layout layouts/application.html.erb (Duration: 47.8ms | Allocations: 7810)
+Completed 200 OK in 66ms (Views: 46.9ms | ActiveRecord: 3.6ms | Allocations: 9427)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2023-07-08 14:02:54 +0000
+Processing by Devise::SessionsController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 9ms (ActiveRecord: 0.3ms | Allocations: 3726)
+
+
+Started GET "/" for ::1 at 2023-07-08 14:02:54 +0000
+Processing by PagesController#home as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered shared/_home.html.erb (Duration: 1.5ms | Allocations: 323)
+  Rendered pages/home.html.erb within layouts/application (Duration: 2.7ms | Allocations: 539)
+  Rendered layout layouts/application.html.erb (Duration: 15.3ms | Allocations: 7328)
+Completed 200 OK in 20ms (Views: 16.3ms | ActiveRecord: 0.0ms | Allocations: 8145)
+
+
+Started GET "/users/sign_up" for ::1 at 2023-07-08 14:02:56 +0000
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered shared/_navbar.html.erb (Duration: 2.0ms | Allocations: 584)
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.2ms | Allocations: 291)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 27.0ms | Allocations: 7101)
+  Rendered layout layouts/application.html.erb (Duration: 27.8ms | Allocations: 7195)
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 0.0ms | Allocations: 8901)
+
+
+  
+ActionView::Template::Error (undefined method `avatar' for #<User id: nil, name: "", email: "", created_at: nil, updated_at: nil>):
+     5:     <%= render "devise/shared/error_messages", resource: resource %>
+     6:       <div class="flex flex-col gap-2">
+     7:         <!-- <div class="field  w-full">
+     8:           <% if resource.avatar.attached? %>
+     9:             <%= image_tag(resource.avatar) %>
+    10:           <% else %>
+    11:             <%= image_tag('/default_profile.jpg') %>
+  
+app/views/devise/registrations/new.html.erb:8
+app/views/devise/registrations/new.html.erb:4
+Started GET "/users/sign_up" for ::1 at 2023-07-08 14:03:43 +0000
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered shared/_navbar.html.erb (Duration: 36.4ms | Allocations: 686)
+  Rendered devise/shared/_error_messages.html.erb (Duration: 2.2ms | Allocations: 291)
+  Rendered devise/shared/_links.html.erb (Duration: 4.4ms | Allocations: 449)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 67.6ms | Allocations: 5067)
+  Rendered layout layouts/application.html.erb (Duration: 1036.6ms | Allocations: 56923)
+Completed 200 OK in 1187ms (Views: 1077.6ms | ActiveRecord: 12.0ms | Allocations: 82814)
+
+
+Started GET "/users/sign_up" for ::1 at 2023-07-08 14:03:48 +0000
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered shared/_navbar.html.erb (Duration: 0.5ms | Allocations: 137)
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 14)
+  Rendered devise/shared/_links.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 4.0ms | Allocations: 1112)
+  Rendered layout layouts/application.html.erb (Duration: 59.5ms | Allocations: 7887)
+Completed 200 OK in 65ms (Views: 61.5ms | ActiveRecord: 0.0ms | Allocations: 8701)
+
+
+Started POST "/users" for ::1 at 2023-07-08 14:04:02 +0000
+Processing by Devise::RegistrationsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"adfs", "email"=>"yishafiu@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+[31mUnpermitted parameter: :name. Context: { controller: Devise::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007f7b28d91f98>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"adfs", "email"=>"yishafiu@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up", "controller"=>"devise/registrations", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (3.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yishafiu@gmail.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered shared/_navbar.html.erb (Duration: 0.2ms | Allocations: 23)
+  Rendered devise/shared/_error_messages.html.erb (Duration: 2.4ms | Allocations: 688)
+  Rendered devise/shared/_links.html.erb (Duration: 0.1ms | Allocations: 26)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 12.3ms | Allocations: 2023)
+  Rendered layout layouts/application.html.erb (Duration: 40.4ms | Allocations: 8833)
+Completed 422 Unprocessable Entity in 528ms (Views: 42.2ms | ActiveRecord: 4.5ms | Allocations: 19454)
+
+
+Started POST "/users" for ::1 at 2023-07-08 14:04:29 +0000
+Processing by Devise::RegistrationsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"ibnscon", "email"=>"ibnsco@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+[31mUnpermitted parameter: :name. Context: { controller: Devise::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007f7b24027460>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"ibnscon", "email"=>"ibnsco@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up", "controller"=>"devise/registrations", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ibnsco@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", ""], ["email", "ibnsco@gmail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-07-08 14:04:29.928759"], ["updated_at", "2023-07-08 14:04:29.928759"]]
+  [1m[36mTRANSACTION (21.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 449ms (ActiveRecord: 23.4ms | Allocations: 7580)
+
+
+Started GET "/" for ::1 at 2023-07-08 14:04:30 +0000
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (6.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 3]]
+  ↳ app/views/shared/_categories.html.erb:32
+  Rendered shared/_categories.html.erb (Duration: 32.2ms | Allocations: 2127)
+  Rendered pages/home.html.erb within layouts/application (Duration: 38.4ms | Allocations: 2546)
+  Rendered layout layouts/application.html.erb (Duration: 77.2ms | Allocations: 9384)
+Completed 200 OK in 136ms (Views: 76.9ms | ActiveRecord: 13.1ms | Allocations: 17912)
+
+

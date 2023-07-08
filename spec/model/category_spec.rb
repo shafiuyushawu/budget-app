@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-
-  before :each do 
-    @user = User.new(name:"Shafiu", email: 'shafiu@gmail.com')
+  before :each do
+    @user = User.new(name: 'Shafiu', email: 'shafiu@gmail.com')
     @category = Category.new(name: 'Clothes', icon: 'shirt.png', user_id: @user.id)
   end
 

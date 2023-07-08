@@ -1,29 +1,27 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
-  def new 
+  def new
     @category = Category.new
   end
 
-  def create 
-    @category = Category.new(name: category_params[:name],icon: category_params[:icon], user_id: current_user.id )
- 
+  def create
+    @category = Category.new(name: category_params[:name], icon: category_params[:icon], user_id: current_user.id)
 
-    if @category.save 
+    if @category.save
       redirect_to root_path
     else
       render :new
     end
-  end 
-
-	 def destroy
-    def destroy
-      @category = Category.find(params[:id])
-      @category.destroy
-      redirect_to root_path
-    end
-    
   end
 
-  private 
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    redirect_to root_path
+  end
+
+  private
 
   def category_params
     params.require(:category).permit(:name, :icon)

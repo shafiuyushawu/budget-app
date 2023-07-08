@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Entity, type: :model do
-  before :each do 
+  before :each do
     @user = User.new(name: 'Shafiu', email: 'shafiu@gmail.com')
-    @entity = Entity.new(name: 'Clothes', amount:50, user_id: @user.id)
+    @entity = Entity.new(name: 'Clothes', amount: 50, user_id: @user.id)
   end
 
   it 'name should be present' do

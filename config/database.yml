@@ -14,23 +14,27 @@
 # Configure Using Gemfile
 # gem "pg"
 #
-production:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-  
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
   database: budget_app_development
+  username: shafiu
+  password: "Soccer"
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  username: shafiu
+  #username: budget_app
 
   # The password associated with the postgres role (username).
-  password: 'Soccer'
+  #password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -56,6 +60,8 @@ development:
 test:
   <<: *default
   database: budget_app_test
+  username: shafiu  
+  password: "Soccer"
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -77,8 +83,8 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+
 production:
   <<: *default
-  database: budget_app_production
-  username: budget_app
-  password: <%= ENV["BUDGET_APP_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  

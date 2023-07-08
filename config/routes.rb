@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :categories, only: [:new, :create, :destroy] do
-    resources :entities, only: [:index, :new,  :create]
+    resources :entities, only: [:index, :new,  :create, :destroy]
   end
 
 end

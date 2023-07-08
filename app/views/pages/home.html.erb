@@ -1,6 +1,6 @@
 
-  <% if current_user %>
-  <%= render '/shared/categories'%>
+  <% if current_user && current_user.present?  %>
+  <%= render '/shared/categories' %>
   <% else %>
     <%= render '/shared/home'%>
   <% end %>

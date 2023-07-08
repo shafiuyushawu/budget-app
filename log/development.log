@@ -42096,3 +42096,853 @@ Processing by PagesController#home as TURBO_STREAM
 Completed 200 OK in 136ms (Views: 76.9ms | ActiveRecord: 13.1ms | Allocations: 17912)
 
 
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (22.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "budget_app_development"[0m
+  [1m[35m (30.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "budget_app_test"[0m
+  [1m[35m (234.3ms)[0m  [1m[35mCREATE DATABASE "budget_app_development" ENCODING = 'unicode'[0m
+  [1m[35m (75.0ms)[0m  [1m[35mCREATE DATABASE "budget_app_test" ENCODING = 'unicode'[0m
+  [1m[35m (66.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2127889314188895495)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20230702165239)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying DEFAULT '' NOT NULL, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230702165239"]]
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategories (20230706134600)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "name" character varying, "icon" character varying, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b8e2f7adfc"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE INDEX "index_categories_on_user_id" ON "categories" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230706134600"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEntities (20230706145950)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "entities" ("id" bigserial primary key, "name" character varying, "amount" integer, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_71e168c975"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE INDEX "index_entities_on_user_id" ON "entities" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230706145950"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCategoriesEntities (20230707193618)
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "categories_entities" ("id" bigserial primary key, "category_id" bigint NOT NULL, "entity_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_0eb644f51e"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+, CONSTRAINT "fk_rails_4f3b53525f"
+FOREIGN KEY ("entity_id")
+  REFERENCES "entities" ("id")
+)[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE INDEX "index_categories_entities_on_category_id" ON "categories_entities" ("category_id")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE INDEX "index_categories_entities_on_entity_id" ON "categories_entities" ("entity_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230707193618"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-07-08 15:14:21.664956"], ["updated_at", "2023-07-08 15:14:21.664956"]]
+  [1m[36mTRANSACTION (47.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(2127889314188895495)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2023-07-08 15:15:48 +0000
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered shared/_home.html.erb (Duration: 1.2ms | Allocations: 409)
+  Rendered pages/home.html.erb within layouts/application (Duration: 4.6ms | Allocations: 1180)
+  Rendered layout layouts/application.html.erb (Duration: 101.6ms | Allocations: 55149)
+Completed 200 OK in 136ms (Views: 106.6ms | ActiveRecord: 4.9ms | Allocations: 66808)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:16:09 +0000
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered shared/_home.html.erb (Duration: 1.0ms | Allocations: 410)
+  Rendered pages/home.html.erb within layouts/application (Duration: 3.1ms | Allocations: 1181)
+  Rendered layout layouts/application.html.erb (Duration: 90.9ms | Allocations: 53613)
+Completed 200 OK in 109ms (Views: 94.0ms | ActiveRecord: 0.0ms | Allocations: 61323)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:16:16 +0000
+Processing by PagesController#home as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered shared/_home.html.erb (Duration: 0.5ms | Allocations: 129)
+  Rendered pages/home.html.erb within layouts/application (Duration: 1.0ms | Allocations: 222)
+  Rendered layout layouts/application.html.erb (Duration: 16.8ms | Allocations: 7006)
+Completed 200 OK in 20ms (Views: 17.9ms | ActiveRecord: 0.0ms | Allocations: 7734)
+
+
+Started GET "/users/sign_up" for ::1 at 2023-07-08 15:21:48 +0000
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered shared/_navbar.html.erb (Duration: 2.6ms | Allocations: 597)
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.5ms | Allocations: 291)
+  Rendered devise/shared/_links.html.erb (Duration: 2.1ms | Allocations: 449)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 30.7ms | Allocations: 4584)
+  Rendered layout layouts/application.html.erb (Duration: 59.6ms | Allocations: 11427)
+Completed 200 OK in 150ms (Views: 66.5ms | ActiveRecord: 18.1ms | Allocations: 31020)
+
+
+Started POST "/users" for ::1 at 2023-07-08 15:22:07 +0000
+Processing by Devise::RegistrationsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"Shafiu", "email"=>"shafiu@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+[31mUnpermitted parameter: :name. Context: { controller: Devise::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x00007fd494067500>, params: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"Shafiu", "email"=>"shafiu@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up", "controller"=>"devise/registrations", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "shafiu@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (4.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", ""], ["email", "shafiu@gmail.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-07-08 15:22:07.464753"], ["updated_at", "2023-07-08 15:22:07.464753"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 456ms (ActiveRecord: 5.9ms | Allocations: 12861)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:22:07 +0000
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (1.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  Rendered shared/_categories.html.erb (Duration: 10.4ms | Allocations: 2084)
+  Rendered pages/home.html.erb within layouts/application (Duration: 11.2ms | Allocations: 2285)
+  Rendered layout layouts/application.html.erb (Duration: 29.1ms | Allocations: 9045)
+Completed 200 OK in 48ms (Views: 28.8ms | ActiveRecord: 3.2ms | Allocations: 16903)
+
+
+Started GET "/categories/new" for ::1 at 2023-07-08 15:22:19 +0000
+Processing by CategoriesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering categories/new.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 3.3ms | Allocations: 849)
+  Rendered categories/new.html.erb within layouts/application (Duration: 16.6ms | Allocations: 2099)
+  Rendered layout layouts/application.html.erb (Duration: 45.3ms | Allocations: 8939)
+Completed 200 OK in 82ms (Views: 52.8ms | ActiveRecord: 2.9ms | Allocations: 23544)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:23:06 +0000
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  Rendered shared/_categories.html.erb (Duration: 7.6ms | Allocations: 2258)
+  Rendered pages/home.html.erb within layouts/application (Duration: 10.7ms | Allocations: 2990)
+  Rendered layout layouts/application.html.erb (Duration: 91.6ms | Allocations: 54923)
+Completed 200 OK in 147ms (Views: 95.6ms | ActiveRecord: 6.4ms | Allocations: 89165)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:23:34 +0000
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (1.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  Rendered shared/_categories.html.erb (Duration: 5.4ms | Allocations: 973)
+  Rendered pages/home.html.erb within layouts/application (Duration: 6.0ms | Allocations: 1047)
+  Rendered layout layouts/application.html.erb (Duration: 27.0ms | Allocations: 7804)
+Completed 200 OK in 35ms (Views: 28.0ms | ActiveRecord: 1.4ms | Allocations: 9410)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2023-07-08 15:23:36 +0000
+Processing by Devise::SessionsController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 10ms (ActiveRecord: 0.4ms | Allocations: 3714)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:23:36 +0000
+Processing by PagesController#home as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered shared/_home.html.erb (Duration: 1.0ms | Allocations: 320)
+  Rendered pages/home.html.erb within layouts/application (Duration: 1.5ms | Allocations: 536)
+  Rendered layout layouts/application.html.erb (Duration: 14.1ms | Allocations: 7325)
+Completed 200 OK in 19ms (Views: 15.1ms | ActiveRecord: 0.0ms | Allocations: 8132)
+
+
+Started GET "/users/sign_up" for ::1 at 2023-07-08 15:25:07 +0000
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered shared/_navbar.html.erb (Duration: 3.9ms | Allocations: 597)
+  Rendered devise/shared/_error_messages.html.erb (Duration: 1.3ms | Allocations: 291)
+  Rendered devise/shared/_links.html.erb (Duration: 2.7ms | Allocations: 449)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 33.3ms | Allocations: 4584)
+  Rendered layout layouts/application.html.erb (Duration: 58.3ms | Allocations: 11427)
+Completed 200 OK in 153ms (Views: 63.6ms | ActiveRecord: 16.9ms | Allocations: 33000)
+
+
+Started GET "/users/sign_in" for ::1 at 2023-07-08 15:25:12 +0000
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered shared/_navbar.html.erb (Duration: 0.7ms | Allocations: 188)
+  Rendered devise/shared/_links.html.erb (Duration: 1.3ms | Allocations: 274)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 19.4ms | Allocations: 3220)
+  Rendered layout layouts/application.html.erb (Duration: 43.5ms | Allocations: 10047)
+Completed 200 OK in 52ms (Views: 46.8ms | ActiveRecord: 0.0ms | Allocations: 12139)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-07-08 15:25:21 +0000
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"shafiu@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "shafiu@gmail.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 378ms (ActiveRecord: 2.1ms | Allocations: 5777)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:25:21 +0000
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  Rendered shared/_categories.html.erb (Duration: 5.6ms | Allocations: 2095)
+  Rendered pages/home.html.erb within layouts/application (Duration: 6.2ms | Allocations: 2296)
+  Rendered layout layouts/application.html.erb (Duration: 20.3ms | Allocations: 9056)
+Completed 200 OK in 36ms (Views: 20.9ms | ActiveRecord: 3.1ms | Allocations: 16496)
+
+
+Started GET "/categories/new" for ::1 at 2023-07-08 15:25:27 +0000
+Processing by CategoriesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering categories/new.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 1.5ms | Allocations: 849)
+  Rendered categories/new.html.erb within layouts/application (Duration: 5.0ms | Allocations: 2118)
+  Rendered layout layouts/application.html.erb (Duration: 15.2ms | Allocations: 8958)
+Completed 200 OK in 33ms (Views: 17.3ms | ActiveRecord: 3.9ms | Allocations: 23578)
+
+
+Started POST "/categories" for ::1 at 2023-07-08 15:25:37 +0000
+Processing by CategoriesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category"=>{"name"=>"Burger", "icon"=>"https://www.thecookierookie.com/wp-content/uploads/2023/04/featured-stovetop-burgers-recipe.jpg"}, "commit"=>"Add Category"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/categories_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+  [1m[36mCategory Create (2.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "icon", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Burger"], ["icon", "https://www.thecookierookie.com/wp-content/uploads/2023/04/featured-stovetop-burgers-recipe.jpg"], ["user_id", 1], ["created_at", "2023-07-08 15:25:38.065104"], ["updated_at", "2023-07-08 15:25:38.065104"]]
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 125ms (ActiveRecord: 8.8ms | Allocations: 10215)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:25:38 +0000
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  [1m[36mEntity Load (1.6ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:33
+  Rendered shared/_categories.html.erb (Duration: 152.8ms | Allocations: 22845)
+  Rendered pages/home.html.erb within layouts/application (Duration: 153.3ms | Allocations: 22935)
+  Rendered layout layouts/application.html.erb (Duration: 182.1ms | Allocations: 29901)
+Completed 200 OK in 193ms (Views: 172.1ms | ActiveRecord: 13.1ms | Allocations: 31370)
+
+
+Started GET "/categories/1/entities" for ::1 at 2023-07-08 15:25:43 +0000
+Processing by EntitiesController#index as HTML
+  Parameters: {"category_id"=>"1"}
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:3:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:5:in `index'
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.8ms | Allocations: 5476)
+
+
+  
+NoMethodError (undefined method `categories' for #<User id: 1, name: "", email: "shafiu@gmail.com", created_at: "2023-07-08 15:22:07.464753000 +0000", updated_at: "2023-07-08 15:22:07.464753000 +0000">):
+  
+app/controllers/entities_controller.rb:5:in `index'
+Started GET "/" for ::1 at 2023-07-08 15:27:26 +0000
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  [1m[36mEntity Load (0.6ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:33
+  Rendered shared/_categories.html.erb (Duration: 14.5ms | Allocations: 2447)
+  Rendered pages/home.html.erb within layouts/application (Duration: 14.9ms | Allocations: 2515)
+  Rendered layout layouts/application.html.erb (Duration: 38.1ms | Allocations: 9463)
+Completed 200 OK in 48ms (Views: 37.8ms | ActiveRecord: 1.8ms | Allocations: 11027)
+
+
+Started DELETE "/categories/1" for ::1 at 2023-07-08 15:27:27 +0000
+Processing by CategoriesController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"1"}
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/categories_controller.rb:17:in `destroy'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/categories_controller.rb:18:in `destroy'
+  [1m[36mCategoriesEntity Load (0.3ms)[0m  [1m[34mSELECT "categories_entities".* FROM "categories_entities" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 1]]
+  ↳ app/controllers/categories_controller.rb:18:in `destroy'
+  [1m[36mEntity Load (0.7ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 1]]
+  ↳ app/controllers/categories_controller.rb:18:in `destroy'
+  [1m[36mCategory Destroy (1.7ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/categories_controller.rb:18:in `destroy'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/categories_controller.rb:18:in `destroy'
+Redirected to http://localhost:3000/
+Completed 302 Found in 25ms (ActiveRecord: 4.8ms | Allocations: 5277)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:27:27 +0000
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  Rendered shared/_categories.html.erb (Duration: 3.4ms | Allocations: 921)
+  Rendered pages/home.html.erb within layouts/application (Duration: 3.7ms | Allocations: 992)
+  Rendered layout layouts/application.html.erb (Duration: 26.3ms | Allocations: 7637)
+Completed 200 OK in 32ms (Views: 27.1ms | ActiveRecord: 0.9ms | Allocations: 8975)
+
+
+Started GET "/categories/new" for ::1 at 2023-07-08 15:27:30 +0000
+Processing by CategoriesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering categories/new.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 0.4ms | Allocations: 102)
+  Rendered categories/new.html.erb within layouts/application (Duration: 2.6ms | Allocations: 857)
+  Rendered layout layouts/application.html.erb (Duration: 37.8ms | Allocations: 7504)
+Completed 200 OK in 40ms (Views: 38.8ms | ActiveRecord: 0.0ms | Allocations: 7845)
+
+
+Started POST "/categories" for ::1 at 2023-07-08 15:27:33 +0000
+Processing by CategoriesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category"=>{"name"=>"fs", "icon"=>"sf"}, "commit"=>"Add Category"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/categories_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+  [1m[36mCategory Create (0.8ms)[0m  [1m[32mINSERT INTO "categories" ("name", "icon", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "fs"], ["icon", "sf"], ["user_id", 1], ["created_at", "2023-07-08 15:27:33.291933"], ["updated_at", "2023-07-08 15:27:33.291933"]]
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 37ms (ActiveRecord: 3.1ms | Allocations: 4183)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:27:33 +0000
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  [1m[36mEntity Load (1.5ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/views/shared/_categories.html.erb:33
+  Rendered shared/_categories.html.erb (Duration: 14.6ms | Allocations: 2298)
+  Rendered pages/home.html.erb within layouts/application (Duration: 15.0ms | Allocations: 2369)
+  Rendered layout layouts/application.html.erb (Duration: 41.7ms | Allocations: 9097)
+Completed 200 OK in 56ms (Views: 41.7ms | ActiveRecord: 5.2ms | Allocations: 10436)
+
+
+Started GET "/sf" for ::1 at 2023-07-08 15:27:33 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/sf"):
+  
+Started GET "/categories/2/entities" for ::1 at 2023-07-08 15:27:36 +0000
+Processing by EntitiesController#index as HTML
+  Parameters: {"category_id"=>"2"}
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:3:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:5:in `index'
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 1.1ms | Allocations: 4734)
+
+
+  
+NoMethodError (undefined method `categories' for #<User id: 1, name: "", email: "shafiu@gmail.com", created_at: "2023-07-08 15:22:07.464753000 +0000", updated_at: "2023-07-08 15:22:07.464753000 +0000">):
+  
+app/controllers/entities_controller.rb:5:in `index'
+Started GET "/categories/2/sf" for ::1 at 2023-07-08 15:27:36 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/categories/2/sf"):
+  
+Started GET "/" for ::1 at 2023-07-08 15:27:40 +0000
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (3.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  [1m[36mEntity Load (0.7ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/views/shared/_categories.html.erb:33
+  Rendered shared/_categories.html.erb (Duration: 18.8ms | Allocations: 2396)
+  Rendered pages/home.html.erb within layouts/application (Duration: 19.4ms | Allocations: 2464)
+  Rendered layout layouts/application.html.erb (Duration: 51.5ms | Allocations: 9408)
+Completed 200 OK in 61ms (Views: 50.0ms | ActiveRecord: 4.1ms | Allocations: 10782)
+
+
+Started GET "/sf" for ::1 at 2023-07-08 15:27:40 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/sf"):
+  
+Started GET "/categories/2/entities" for ::1 at 2023-07-08 15:27:43 +0000
+Processing by EntitiesController#index as HTML
+  Parameters: {"category_id"=>"2"}
+  [1m[36mCategory Load (1.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:3:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:5:in `index'
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 2.1ms | Allocations: 4528)
+
+
+  
+NoMethodError (undefined method `categories' for #<User id: 1, name: "", email: "shafiu@gmail.com", created_at: "2023-07-08 15:22:07.464753000 +0000", updated_at: "2023-07-08 15:22:07.464753000 +0000">):
+  
+app/controllers/entities_controller.rb:5:in `index'
+Started GET "/categories/2/sf" for ::1 at 2023-07-08 15:27:43 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/categories/2/sf"):
+  
+Started GET "/categories/2/entities" for ::1 at 2023-07-08 15:29:32 +0000
+Processing by EntitiesController#index as HTML
+  Parameters: {"category_id"=>"2"}
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:3:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering entities/index.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 2.2ms | Allocations: 1529)
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/entities/index.html.erb:8
+  [1m[36mEntity Load (0.7ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/views/entities/index.html.erb:9
+  [1m[36mEntity Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1 LIMIT $2[0m  [["category_id", 2], ["LIMIT", 1]]
+  ↳ app/views/entities/index.html.erb:14
+  Rendered entities/index.html.erb within layouts/application (Duration: 43.8ms | Allocations: 11303)
+  Rendered layout layouts/application.html.erb (Duration: 72.3ms | Allocations: 32264)
+Completed 200 OK in 164ms (Views: 67.3ms | ActiveRecord: 17.3ms | Allocations: 71961)
+
+
+Started GET "/categories/2/entities" for ::1 at 2023-07-08 15:29:33 +0000
+Processing by EntitiesController#index as HTML
+  Parameters: {"category_id"=>"2"}
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:3:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering entities/index.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 0.6ms | Allocations: 171)
+  [1m[36mCategory Load (1.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/entities/index.html.erb:8
+  [1m[36mEntity Load (0.6ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/views/entities/index.html.erb:9
+  [1m[36mEntity Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1 LIMIT $2[0m  [["category_id", 2], ["LIMIT", 1]]
+  ↳ app/views/entities/index.html.erb:14
+  Rendered entities/index.html.erb within layouts/application (Duration: 13.1ms | Allocations: 2536)
+  Rendered layout layouts/application.html.erb (Duration: 32.6ms | Allocations: 9188)
+Completed 200 OK in 48ms (Views: 31.0ms | ActiveRecord: 4.1ms | Allocations: 11294)
+
+
+Started GET "/categories/2/entities/new" for ::1 at 2023-07-08 15:29:35 +0000
+Processing by EntitiesController#new as HTML
+  Parameters: {"category_id"=>"2"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:11:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering entities/new.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 0.3ms | Allocations: 108)
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/entities/new.html.erb:12:in `map'
+  Rendered entities/new.html.erb within layouts/application (Duration: 6.7ms | Allocations: 2229)
+  Rendered layout layouts/application.html.erb (Duration: 18.5ms | Allocations: 8981)
+Completed 200 OK in 33ms (Views: 18.8ms | ActiveRecord: 1.0ms | Allocations: 23739)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:29:37 +0000
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  [1m[36mEntity Load (0.9ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/views/shared/_categories.html.erb:33
+  Rendered shared/_categories.html.erb (Duration: 14.2ms | Allocations: 3069)
+  Rendered pages/home.html.erb within layouts/application (Duration: 14.5ms | Allocations: 3164)
+  Rendered layout layouts/application.html.erb (Duration: 30.8ms | Allocations: 10021)
+Completed 200 OK in 40ms (Views: 31.2ms | ActiveRecord: 1.9ms | Allocations: 12110)
+
+
+Started GET "/sf" for ::1 at 2023-07-08 15:29:37 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/sf"):
+  
+Started GET "/categories/2/entities" for ::1 at 2023-07-08 15:29:39 +0000
+Processing by EntitiesController#index as HTML
+  Parameters: {"category_id"=>"2"}
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:3:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering entities/index.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 0.7ms | Allocations: 205)
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/entities/index.html.erb:8
+  [1m[36mEntity Load (0.6ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/views/entities/index.html.erb:9
+  [1m[36mEntity Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1 LIMIT $2[0m  [["category_id", 2], ["LIMIT", 1]]
+  ↳ app/views/entities/index.html.erb:14
+  Rendered entities/index.html.erb within layouts/application (Duration: 12.1ms | Allocations: 2585)
+  Rendered layout layouts/application.html.erb (Duration: 37.6ms | Allocations: 9533)
+Completed 200 OK in 48ms (Views: 36.6ms | ActiveRecord: 3.3ms | Allocations: 11805)
+
+
+Started GET "/categories/2/sf" for ::1 at 2023-07-08 15:29:39 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/categories/2/sf"):
+  
+Started GET "/" for ::1 at 2023-07-08 15:32:20 +0000
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (1.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  [1m[36mEntity Load (2.0ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/views/shared/_categories.html.erb:33
+  Rendered shared/_categories.html.erb (Duration: 84.6ms | Allocations: 21780)
+  Rendered pages/home.html.erb within layouts/application (Duration: 85.0ms | Allocations: 21875)
+  Rendered layout layouts/application.html.erb (Duration: 135.3ms | Allocations: 42819)
+Completed 200 OK in 214ms (Views: 124.9ms | ActiveRecord: 30.7ms | Allocations: 54921)
+
+
+Started GET "/sf" for ::1 at 2023-07-08 15:32:21 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/sf"):
+  
+Started DELETE "/users/sign_out" for ::1 at 2023-07-08 15:32:22 +0000
+Processing by Devise::SessionsController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 8ms (ActiveRecord: 0.3ms | Allocations: 3319)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:32:22 +0000
+Processing by PagesController#home as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  Rendered shared/_home.html.erb (Duration: 0.6ms | Allocations: 127)
+  Rendered pages/home.html.erb within layouts/application (Duration: 1.3ms | Allocations: 223)
+  Rendered layout layouts/application.html.erb (Duration: 13.6ms | Allocations: 7013)
+Completed 200 OK in 19ms (Views: 15.4ms | ActiveRecord: 0.0ms | Allocations: 7698)
+
+
+Started GET "/users/sign_up" for ::1 at 2023-07-08 15:32:28 +0000
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered shared/_navbar.html.erb (Duration: 0.8ms | Allocations: 184)
+  Rendered devise/shared/_error_messages.html.erb (Duration: 0.1ms | Allocations: 16)
+  Rendered devise/shared/_links.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered devise/registrations/new.html.erb within layouts/application (Duration: 4.0ms | Allocations: 1234)
+  Rendered layout layouts/application.html.erb (Duration: 29.7ms | Allocations: 8091)
+Completed 200 OK in 35ms (Views: 33.2ms | ActiveRecord: 0.0ms | Allocations: 9496)
+
+
+Started GET "/users/sign_in" for ::1 at 2023-07-08 15:32:30 +0000
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered shared/_navbar.html.erb (Duration: 1.2ms | Allocations: 187)
+  Rendered devise/shared/_links.html.erb (Duration: 1.5ms | Allocations: 274)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 13.8ms | Allocations: 3116)
+  Rendered layout layouts/application.html.erb (Duration: 38.9ms | Allocations: 10020)
+Completed 200 OK in 53ms (Views: 44.5ms | ActiveRecord: 0.0ms | Allocations: 11525)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-07-08 15:32:33 +0000
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"shafiu@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "shafiu@gmail.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 372ms (ActiveRecord: 0.5ms | Allocations: 3299)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:32:33 +0000
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (1.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  [1m[36mEntity Load (1.7ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/views/shared/_categories.html.erb:33
+  Rendered shared/_categories.html.erb (Duration: 18.4ms | Allocations: 2433)
+  Rendered pages/home.html.erb within layouts/application (Duration: 19.8ms | Allocations: 2510)
+  Rendered layout layouts/application.html.erb (Duration: 46.2ms | Allocations: 9263)
+Completed 200 OK in 62ms (Views: 45.0ms | ActiveRecord: 7.0ms | Allocations: 10660)
+
+
+Started GET "/sf" for ::1 at 2023-07-08 15:32:33 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/sf"):
+  
+Started GET "/categories/new" for ::1 at 2023-07-08 15:32:42 +0000
+Processing by CategoriesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering categories/new.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 0.9ms | Allocations: 178)
+  Rendered categories/new.html.erb within layouts/application (Duration: 3.4ms | Allocations: 1026)
+  Rendered layout layouts/application.html.erb (Duration: 25.8ms | Allocations: 7867)
+Completed 200 OK in 30ms (Views: 28.9ms | ActiveRecord: 0.0ms | Allocations: 8768)
+
+
+Started GET "/categories/sf" for ::1 at 2023-07-08 15:32:46 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/categories/sf"):
+  
+Started POST "/categories" for ::1 at 2023-07-08 15:33:04 +0000
+Processing by CategoriesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category"=>{"name"=>"BUrger", "icon"=>"https://www.thecookierookie.com/wp-content/uploads/2023/04/featured-stovetop-burgers-recipe.jpg"}, "commit"=>"Add Category"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/categories_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+  [1m[36mCategory Create (4.1ms)[0m  [1m[32mINSERT INTO "categories" ("name", "icon", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "BUrger"], ["icon", "https://www.thecookierookie.com/wp-content/uploads/2023/04/featured-stovetop-burgers-recipe.jpg"], ["user_id", 1], ["created_at", "2023-07-08 15:33:04.389357"], ["updated_at", "2023-07-08 15:33:04.389357"]]
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (28.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/categories_controller.rb:9:in `create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 66ms (ActiveRecord: 34.1ms | Allocations: 6325)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:33:04 +0000
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (1.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  [1m[36mEntity Load (0.7ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 3]]
+  ↳ app/views/shared/_categories.html.erb:33
+  [1m[36mEntity Load (1.5ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/views/shared/_categories.html.erb:33
+  Rendered shared/_categories.html.erb (Duration: 29.6ms | Allocations: 3684)
+  Rendered pages/home.html.erb within layouts/application (Duration: 30.5ms | Allocations: 3761)
+  Rendered layout layouts/application.html.erb (Duration: 58.1ms | Allocations: 10511)
+Completed 200 OK in 73ms (Views: 57.5ms | ActiveRecord: 4.4ms | Allocations: 11902)
+
+
+Started GET "/sf" for ::1 at 2023-07-08 15:33:04 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/sf"):
+  
+Started DELETE "/categories/2" for ::1 at 2023-07-08 15:33:07 +0000
+Processing by CategoriesController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"2"}
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/categories_controller.rb:17:in `destroy'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/categories_controller.rb:18:in `destroy'
+  [1m[36mCategoriesEntity Load (0.3ms)[0m  [1m[34mSELECT "categories_entities".* FROM "categories_entities" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/controllers/categories_controller.rb:18:in `destroy'
+  [1m[36mEntity Load (0.2ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 2]]
+  ↳ app/controllers/categories_controller.rb:18:in `destroy'
+  [1m[36mCategory Destroy (0.7ms)[0m  [1m[31mDELETE FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 2]]
+  ↳ app/controllers/categories_controller.rb:18:in `destroy'
+  [1m[36mTRANSACTION (18.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/categories_controller.rb:18:in `destroy'
+Redirected to http://localhost:3000/
+Completed 302 Found in 35ms (ActiveRecord: 20.3ms | Allocations: 5187)
+
+
+Started GET "/" for ::1 at 2023-07-08 15:33:07 +0000
+Processing by PagesController#home as TURBO_STREAM
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/pages_controller.rb:5:in `home'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1 ORDER BY "categories"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/shared/_categories.html.erb:32
+  [1m[36mEntity Load (0.2ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 3]]
+  ↳ app/views/shared/_categories.html.erb:33
+  Rendered shared/_categories.html.erb (Duration: 7.0ms | Allocations: 2303)
+  Rendered pages/home.html.erb within layouts/application (Duration: 7.3ms | Allocations: 2374)
+  Rendered layout layouts/application.html.erb (Duration: 22.9ms | Allocations: 9216)
+Completed 200 OK in 28ms (Views: 23.2ms | ActiveRecord: 0.7ms | Allocations: 10561)
+
+
+Started GET "/categories/3/entities" for ::1 at 2023-07-08 15:33:08 +0000
+Processing by EntitiesController#index as HTML
+  Parameters: {"category_id"=>"3"}
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:3:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering entities/index.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 1.3ms | Allocations: 170)
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/entities/index.html.erb:8
+  [1m[36mEntity Load (0.2ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 3]]
+  ↳ app/views/entities/index.html.erb:9
+  [1m[36mEntity Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1 LIMIT $2[0m  [["category_id", 3], ["LIMIT", 1]]
+  ↳ app/views/entities/index.html.erb:14
+  Rendered entities/index.html.erb within layouts/application (Duration: 10.0ms | Allocations: 2538)
+  Rendered layout layouts/application.html.erb (Duration: 22.7ms | Allocations: 9189)
+Completed 200 OK in 33ms (Views: 22.2ms | ActiveRecord: 2.5ms | Allocations: 11148)
+
+
+Started GET "/categories/3/entities/new" for ::1 at 2023-07-08 15:33:10 +0000
+Processing by EntitiesController#new as HTML
+  Parameters: {"category_id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:11:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering entities/new.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 0.4ms | Allocations: 103)
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/entities/new.html.erb:12:in `map'
+  Rendered entities/new.html.erb within layouts/application (Duration: 5.7ms | Allocations: 1336)
+  Rendered layout layouts/application.html.erb (Duration: 19.7ms | Allocations: 7972)
+Completed 200 OK in 25ms (Views: 19.8ms | ActiveRecord: 0.9ms | Allocations: 9407)
+
+
+Started POST "/categories/3/entities" for ::1 at 2023-07-08 15:33:25 +0000
+Processing by EntitiesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "entity"=>{"name"=>"Salad", "amount"=>"20"}, "group"=>"3", "commit"=>"Add Transanction", "category_id"=>"3"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/entities_controller.rb:16:in `create'
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:16:in `create'
+  [1m[36mEntity Create (1.2ms)[0m  [1m[32mINSERT INTO "entities" ("name", "amount", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Salad"], ["amount", 20], ["user_id", 1], ["created_at", "2023-07-08 15:33:25.320980"], ["updated_at", "2023-07-08 15:33:25.320980"]]
+  ↳ app/controllers/entities_controller.rb:16:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/entities_controller.rb:16:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/entities_controller.rb:18:in `create'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:18:in `create'
+  [1m[36mEntity Load (0.9ms)[0m  [1m[34mSELECT "entities".* FROM "entities" WHERE "entities"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:18:in `create'
+  [1m[36mCategoriesEntity Create (2.3ms)[0m  [1m[32mINSERT INTO "categories_entities" ("category_id", "entity_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category_id", 3], ["entity_id", 1], ["created_at", "2023-07-08 15:33:25.387831"], ["updated_at", "2023-07-08 15:33:25.387831"]]
+  ↳ app/controllers/entities_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (20.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/entities_controller.rb:18:in `create'
+Redirected to http://localhost:3000/categories/3/entities
+Completed 302 Found in 133ms (ActiveRecord: 36.4ms | Allocations: 24703)
+
+
+Started GET "/categories/3/entities" for ::1 at 2023-07-08 15:33:25 +0000
+Processing by EntitiesController#index as TURBO_STREAM
+  Parameters: {"category_id"=>"3"}
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:3:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering entities/index.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 0.9ms | Allocations: 157)
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/entities/index.html.erb:8
+  [1m[36mEntity Load (0.4ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 3]]
+  ↳ app/views/entities/index.html.erb:9
+  [1m[36mEntity Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1 LIMIT $2[0m  [["category_id", 3], ["LIMIT", 1]]
+  ↳ app/views/entities/index.html.erb:14
+  [1m[36mCACHE Entity Load (0.1ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 3]]
+  ↳ app/views/entities/index.html.erb:18
+  Rendered entities/index.html.erb within layouts/application (Duration: 33.4ms | Allocations: 3627)
+  Rendered layout layouts/application.html.erb (Duration: 71.5ms | Allocations: 10277)
+Completed 200 OK in 87ms (Views: 75.0ms | ActiveRecord: 3.5ms | Allocations: 12240)
+
+
+Started DELETE "/categories/3/entities/1" for ::1 at 2023-07-08 15:33:28 +0000
+Processing by EntitiesController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category_id"=>"3", "id"=>"1"}
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:29:in `destroy'
+  [1m[36mEntity Load (0.4ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1 AND "entities"."id" = $2 LIMIT $3[0m  [["category_id", 3], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:30:in `destroy'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/entities_controller.rb:31:in `destroy'
+  [1m[36mCategoriesEntity Load (0.9ms)[0m  [1m[34mSELECT "categories_entities".* FROM "categories_entities" WHERE "categories_entities"."entity_id" = $1[0m  [["entity_id", 1]]
+  ↳ app/controllers/entities_controller.rb:31:in `destroy'
+  [1m[36mCategoriesEntity Destroy (0.5ms)[0m  [1m[31mDELETE FROM "categories_entities" WHERE "categories_entities"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/entities_controller.rb:31:in `destroy'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" INNER JOIN "categories_entities" ON "categories"."id" = "categories_entities"."category_id" WHERE "categories_entities"."entity_id" = $1[0m  [["entity_id", 1]]
+  ↳ app/controllers/entities_controller.rb:31:in `destroy'
+  [1m[36mEntity Destroy (0.6ms)[0m  [1m[31mDELETE FROM "entities" WHERE "entities"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/entities_controller.rb:31:in `destroy'
+  [1m[36mTRANSACTION (18.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/entities_controller.rb:31:in `destroy'
+Redirected to http://localhost:3000/categories/3/entities
+Completed 302 Found in 53ms (ActiveRecord: 22.0ms | Allocations: 8032)
+
+
+Started GET "/categories/3/entities" for ::1 at 2023-07-08 15:33:28 +0000
+Processing by EntitiesController#index as TURBO_STREAM
+  Parameters: {"category_id"=>"3"}
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:3:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/entities_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering entities/index.html.erb within layouts/application
+  Rendered shared/_user_navbar.html.erb (Duration: 0.7ms | Allocations: 157)
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/entities/index.html.erb:8
+  [1m[36mEntity Load (0.3ms)[0m  [1m[34mSELECT "entities".* FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1[0m  [["category_id", 3]]
+  ↳ app/views/entities/index.html.erb:9
+  [1m[36mEntity Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "entities" INNER JOIN "categories_entities" ON "entities"."id" = "categories_entities"."entity_id" WHERE "categories_entities"."category_id" = $1 LIMIT $2[0m  [["category_id", 3], ["LIMIT", 1]]
+  ↳ app/views/entities/index.html.erb:14
+  Rendered entities/index.html.erb within layouts/application (Duration: 12.0ms | Allocations: 2515)
+  Rendered layout layouts/application.html.erb (Duration: 36.1ms | Allocations: 9166)
+Completed 200 OK in 48ms (Views: 36.1ms | ActiveRecord: 1.8ms | Allocations: 11127)
+
+

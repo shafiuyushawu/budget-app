@@ -175,7 +175,8 @@ If you like this project, clone it and try it.
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
 
-I would like to thank Gregoire Vella for the design guideline on Behance and Microverse community for supporting me through all my journey.
+- Credit goes to [Gregoire Vella](https://www.behance.net/gregoirevella) on Behance whose [original](https://www.behance.net/gallery/19759151/Snapscan-iOs-design-and-branding?tracking_source=) design was used.
+- I would like to thank Microverse for the great project idea. heart
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

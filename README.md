@@ -27,7 +27,7 @@
 # 📖 Recipe App <a name="about-project"></a>
 
 
-**Recipe App** is a rails app which lets users add their favorite food, recipe, and it also alow them to shop for missing ingredient from the recipe.
+**Budget App** is a web-based budgeting application built using Ruby on Rails and PostgreSQL. With Budget app, users can effortlessly track their income and expenses, gaining full control over their finances.
 
 ## 🛠 Built With <a name="built-with"></a>
 
